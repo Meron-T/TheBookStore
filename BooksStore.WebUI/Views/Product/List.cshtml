@@ -1,0 +1,48 @@
+﻿@*@using BooksStore.Domain.Entities 
+@model IEnumerable<Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+@foreach (var p in Model)
+{
+
+    <div>
+        <h3>@p.Name</h3>
+        @p.Description
+        <h4>@p.Price.ToString("c")</h4>
+        </div>
+}*@
+
+@model BooksStore.WebUI.Models.ProductsListViewModel
+
+@{ 
+    ViewBag.Title = "Products";
+}
+
+@foreach (var p in Model.Products)
+{
+    //<div class="well">
+      //  <h3>
+        //    <strong>@p.Name</strong>
+          //  <span class="pull-right label label-primary">@p.Price.ToString("c")</span>
+       // </h3>
+       // <span>@p.Description</span>
+    //</div>
+    @Html.Partial("ProductSummary", p)
+
+
+
+
+}
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x=> Url.Action("List", 
+    new { page = x, category = Model.CurrentCategory}))
+</div>
+
+@*<div class="pager">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+</div>*@
+
